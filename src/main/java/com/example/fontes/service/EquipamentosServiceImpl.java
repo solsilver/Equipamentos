@@ -21,7 +21,8 @@ public class EquipamentosServiceImpl implements EquipamentosService {
 
     @Override
     public List<Equipamentos> encontrarTodos() {
-        return null;
+        List<Equipamentos> equipamentos = equipamentosRepository.findAll();
+        return equipamentos;
     }
 
     @Override
@@ -42,11 +43,14 @@ public class EquipamentosServiceImpl implements EquipamentosService {
 
     @Override
     public Equipamentos inserirEquipamento(Equipamentos equipamentos) {
+        Equipamentos e = equipamentosRepository.save(equipamentos);
+        if (e != null)
+            return e;
         return null;
     }
 
     @Override
     public void retirarEquipamento(Long id) {
-
+    equipamentosRepository.deleteById(id);
     }
 }
