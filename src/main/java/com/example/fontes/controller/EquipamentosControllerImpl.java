@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping
+@RequestMapping("/inventario")
 @Controller
 public class EquipamentosControllerImpl implements EquipamentosController{
 
