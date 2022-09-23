@@ -5,8 +5,13 @@ import com.example.fontes.service.EquipamentosServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping
@@ -18,8 +23,10 @@ public class EquipamentosControllerImpl implements EquipamentosController{
 
 
    @Override
-   public Equipamentos buscarEquipamentoPorId(Long id) {
-      return null;
+   @GetMapping(value = "/{id}")
+   public Optional<Equipamentos> buscarEquipamentoPorId(Long id) {
+      Optional<Equipamentos> e1 = equipamentosService.encontrarPorId(id);
+      return e1;
    }
 
    @Override
@@ -35,8 +42,9 @@ public class EquipamentosControllerImpl implements EquipamentosController{
    }
 
    @Override
+   @PutMapping(value = "/{id}")
    public Equipamentos editarEquipamentos(Long id, Equipamentos equipamentos) {
-      return null;
+      return equipamentosService.editarEquipamento(id, equipamentos);
    }
 
    @Override
