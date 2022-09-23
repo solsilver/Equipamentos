@@ -3,10 +3,11 @@ package com.example.fontes.service;
 import com.example.fontes.model.Equipamentos;
 import com.example.fontes.repository.EquipamentosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class EquipamentosServiceImpl implements EquipamentosService {
 
     @Autowired
