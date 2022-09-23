@@ -8,15 +8,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface EquipamentosController {
-    public Optional<Equipamentos> buscarEquipamentoPorId(@PathVariable("id") Long id);
+    public Optional<Equipamentos> buscarEquipamentoPorId(Long id);
 
-    public Equipamentos inserirEquipamentos(@RequestBody Equipamentos equipamentos);
+    public Equipamentos inserirEquipamentos(Equipamentos equipamentos);
 
     public List<Equipamentos> encontrarTodosEquipamentos();
 
-    public Equipamentos editarEquipamentos(@PathVariable("id") Long id, @RequestBody Equipamentos equipamentos);
+    public Equipamentos editarEquipamentos(Long id, Equipamentos equipamentos);
 
-    public void apagarEquipamento(@PathVariable("id") Long id);
+    public void apagarEquipamento(Long id);
 
 
 }

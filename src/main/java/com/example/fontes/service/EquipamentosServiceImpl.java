@@ -39,7 +39,7 @@ public class EquipamentosServiceImpl implements EquipamentosService {
             if(equipamentos.getQuantidade() != null)
                 e.setQuantidade(equipamentos.getQuantidade());
         }
-        return null;
+        return equipamentosRepository.save(e);
     }
 
     @Override
@@ -52,6 +52,6 @@ public class EquipamentosServiceImpl implements EquipamentosService {
 
     @Override
     public void retirarEquipamento(Long id) {
-    equipamentosRepository.deleteById(id);
+        equipamentosRepository.deleteById(id);
     }
 }

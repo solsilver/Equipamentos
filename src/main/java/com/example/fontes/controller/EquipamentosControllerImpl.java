@@ -24,14 +24,14 @@ public class EquipamentosControllerImpl implements EquipamentosController{
 
    @Override
    @GetMapping(value = "/{id}")
-   public Optional<Equipamentos> buscarEquipamentoPorId(Long id) {
+   public Optional<Equipamentos> buscarEquipamentoPorId(@PathVariable("id") Long id) {
       Optional<Equipamentos> e1 = equipamentosService.encontrarPorId(id);
       return e1;
    }
 
    @Override
    @PostMapping
-   public Equipamentos inserirEquipamentos(Equipamentos equipamentos) {
+   public Equipamentos inserirEquipamentos(@RequestBody Equipamentos equipamentos) {
       return equipamentosService.inserirEquipamento(equipamentos);
    }
 
@@ -43,14 +43,13 @@ public class EquipamentosControllerImpl implements EquipamentosController{
 
    @Override
    @PutMapping(value = "/{id}")
-   public Equipamentos editarEquipamentos(Long id, Equipamentos equipamentos) {
+   public Equipamentos editarEquipamentos(@PathVariable("id") Long id,  @RequestBody Equipamentos equipamentos) {
       return equipamentosService.editarEquipamento(id, equipamentos);
    }
 
    @Override
-   @DeleteMapping
-   public void apagarEquipamento(Long id) {
-   equipamentosService.retirarEquipamento(id);
-
+   @DeleteMapping(value = "/{id}")
+   public void apagarEquipamento(@PathVariable("id") Long id) {
+      equipamentosService.retirarEquipamento(id);
    }
 }
