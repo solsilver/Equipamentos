@@ -3,9 +3,10 @@ package com.example.fontes.service;
 import com.example.fontes.model.Equipamentos;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface EquipamentosService {
-    public Equipamentos encontrarPorId(Long id);
+    public Optional<Equipamentos> encontrarPorId(Long id);
 
     public List<Equipamentos> encontrarTodos();
 
