@@ -4,8 +4,7 @@ import com.example.fontes.model.Equipamentos;
 import com.example.fontes.service.EquipamentosServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,13 +23,15 @@ public class EquipamentosControllerImpl implements EquipamentosController{
    }
 
    @Override
+   @PostMapping
    public Equipamentos inserirEquipamentos(Equipamentos equipamentos) {
-      return null;
+      return equipamentosService.inserirEquipamento(equipamentos);
    }
 
    @Override
+   @GetMapping
    public List<Equipamentos> encontrarTodosEquipamentos() {
-      return null;
+      return equipamentosService.encontrarTodos();
    }
 
    @Override
@@ -39,7 +40,9 @@ public class EquipamentosControllerImpl implements EquipamentosController{
    }
 
    @Override
+   @DeleteMapping
    public void apagarEquipamento(Long id) {
+   equipamentosService.retirarEquipamento(id);
 
    }
 }
