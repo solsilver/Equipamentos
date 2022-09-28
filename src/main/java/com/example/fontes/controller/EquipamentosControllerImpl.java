@@ -3,6 +3,7 @@ package com.example.fontes.controller;
 import com.example.fontes.model.Equipamentos;
 import com.example.fontes.service.EquipamentosServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,32 +25,35 @@ public class EquipamentosControllerImpl implements EquipamentosController{
 
    @Override
    @GetMapping(value = "/{id}")
-   public Optional<Equipamentos> buscarEquipamentoPorId(@PathVariable("id") Long id) {
+   public ResponseEntity<Equipamentos> buscarEquipamentoPorId(@PathVariable("id") Long id) {
       Optional<Equipamentos> e1 = equipamentosService.encontrarPorId(id);
-      return e1;
+
+      return ResponseEntity.ok().body(e1.get());
    }
 
    @Override
    @PostMapping
-   public Equipamentos inserirEquipamentos(@RequestBody Equipamentos equipamentos) {
-      return equipamentosService.inserirEquipamento(equipamentos);
+   public ResponseEntity<Equipamentos> inserirEquipamentos(@RequestBody Equipamentos equipamentos) {
+      return ResponseEntity.ok().body(equipamentosService.inserirEquipamento(equipamentos));
    }
 
    @Override
    @GetMapping
-   public List<Equipamentos> encontrarTodosEquipamentos() {
-      return equipamentosService.encontrarTodos();
+   public ResponseEntity<List<Equipamentos>> encontrarTodosEquipamentos() {
+
+      return ResponseEntity.ok().body(equipamentosService.encontrarTodos());
    }
 
    @Override
    @PutMapping(value = "/{id}")
-   public Equipamentos editarEquipamentos(@PathVariable("id") Long id,  @RequestBody Equipamentos equipamentos) {
-      return equipamentosService.editarEquipamento(id, equipamentos);
+   public ResponseEntity<Equipamentos> editarEquipamentos(@PathVariable("id") Long id, @RequestBody Equipamentos equipamentos) {
+      return ResponseEntity.ok().body(equipamentosService.editarEquipamento(id, equipamentos));
    }
 
    @Override
    @DeleteMapping(value = "/{id}")
-   public void apagarEquipamento(@PathVariable("id") Long id) {
+   public ResponseEntity<?> apagarEquipamento(@PathVariable("id") Long id) {
       equipamentosService.retirarEquipamento(id);
+      return ResponseEntity.noContent().build();
    }
 }
