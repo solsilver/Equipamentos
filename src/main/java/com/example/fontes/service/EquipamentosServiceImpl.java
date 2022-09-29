@@ -1,12 +1,14 @@
 package com.example.fontes.service;
 
+import com.example.fontes.controller.excecao.DuplicatedObjectException;
+import com.example.fontes.controller.excecao.ObjectNotFoundException;
 import com.example.fontes.model.Equipamentos;
 import com.example.fontes.repository.EquipamentosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 @Service
 public class EquipamentosServiceImpl implements EquipamentosService {
 
@@ -15,8 +17,8 @@ public class EquipamentosServiceImpl implements EquipamentosService {
 
     @Override
 
-    public Optional<Equipamentos> encontrarPorId(Long id) {
-        Optional<Equipamentos> e1 = equipamentosRepository.findById(id);
+    public Equipamentos encontrarPorId(Long id) {
+        Equipamentos e1 = equipamentosRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("nao encontramos o equipamento"));
         return e1;
     }
 
@@ -29,14 +31,14 @@ public class EquipamentosServiceImpl implements EquipamentosService {
     @Override
     public Equipamentos editarEquipamento(Long id, Equipamentos equipamentos) {
         Equipamentos e = equipamentosRepository.findById(id).get();
-        if(e != null){
-            if(equipamentos.getCodigo() != null)
+        if (e != null) {
+            if (equipamentos.getCodigo() != null)
                 e.setCodigo(equipamentos.getCodigo());
-            if(equipamentos.getNome() != null)
+            if (equipamentos.getNome() != null)
                 e.setNome(equipamentos.getNome());
-            if(equipamentos.getLocal() != null)
+            if (equipamentos.getLocal() != null)
                 e.setLocal(equipamentos.getLocal());
-            if(equipamentos.getQuantidade() != null)
+            if (equipamentos.getQuantidade() != null)
                 e.setQuantidade(equipamentos.getQuantidade());
         }
         return equipamentosRepository.save(e);
@@ -44,10 +46,13 @@ public class EquipamentosServiceImpl implements EquipamentosService {
 
     @Override
     public Equipamentos inserirEquipamento(Equipamentos equipamentos) {
+        Equipamentos obj = equipamentosRepository.findByLocalAndCodigo(equipamentos.getLocal(), equipamentos.getCodigo());
+        if (obj != null) {
+            throw new DuplicatedObjectException("ja existe no sistema e na bancada");
+        }
+
         Equipamentos e = equipamentosRepository.save(equipamentos);
-        if (e != null)
-            return e;
-        return null;
+        return e;
     }
 
     @Override

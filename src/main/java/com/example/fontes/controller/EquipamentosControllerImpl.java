@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/inventario")
@@ -26,9 +25,9 @@ public class EquipamentosControllerImpl implements EquipamentosController{
    @Override
    @GetMapping(value = "/{id}")
    public ResponseEntity<Equipamentos> buscarEquipamentoPorId(@PathVariable("id") Long id) {
-      Optional<Equipamentos> e1 = equipamentosService.encontrarPorId(id);
+      Equipamentos e1 = equipamentosService.encontrarPorId(id);
 
-      return ResponseEntity.ok().body(e1.get());
+      return ResponseEntity.ok().body(e1);
    }
 
    @Override
