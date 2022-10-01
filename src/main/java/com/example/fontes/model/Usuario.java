@@ -13,14 +13,13 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Equipamentos {
+public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "escreva o nome")
-    @Size(min=1 , max=10 , message="troxa")
     private String nome;
-    private String local;
-    private Integer quantidade;
-    private String codigo;
+    private String cpf;
+    private String senha;
 }
+

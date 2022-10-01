@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -32,7 +33,7 @@ public class EquipamentosControllerImpl implements EquipamentosController{
 
    @Override
    @PostMapping
-   public ResponseEntity<Equipamentos> inserirEquipamentos(@RequestBody Equipamentos equipamentos) {
+   public ResponseEntity<Equipamentos> inserirEquipamentos(@RequestBody @Valid Equipamentos equipamentos) {
       return ResponseEntity.ok().body(equipamentosService.inserirEquipamento(equipamentos));
    }
 
